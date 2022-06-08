@@ -6,51 +6,57 @@ namespace TikTakGame
     {
         private static char c;
         private static int player;
-        Random random = new Random();
 
         static void Main(string[] args)
         {
             int[] arr = new int[9];
-            for (int i = 0; i < 9; i++)
-            {
-                 arr[i] = 32;
-            }
+            char key;          
 
-            Console.WriteLine("Welcome to Tic Tac Toe Game ^^");
-            Console.WriteLine("PLAYER1 ({0}) vs PLAYER2 ({1})", 'X', 'O');
-            Console.WriteLine("Press any key to start the game");
-            Console.ReadKey();
-            Console.Clear();
+            PrintTitle();            
             
-            for (int i = 0; i < 9; i++)
+            key = char.Parse(Console.ReadLine());
+            while (key == 's')
             {
-                if (i % 2 == 0){
-                    c = 'X';
-                    player = 1;
-                }
-                else{
-                    c = 'O';
-                    player = 2;
-                }
-                if (i == 0) { PrintMatrix(arr); } 
-
-                RET:  Console.Write("PLAYER{0}({1}) Choose your step (1-9): ", player,c);
-                int step = int.Parse(Console.ReadLine());
-                if (arr[step-1] == 'X'|| arr[step-1]=='O')
-                {
-                    Console.WriteLine("Your step has already exist, Please try another step");
-                    goto RET;
-                }
-                arr[step - 1] = c;
+                InitialMatrix(arr);
                 Console.Clear();
-                PrintMatrix(arr);
+                for (int i = 0; i < 9; i++)
+                {
+                    if (i % 2 == 0)
+                    {
+                        c = 'X';
+                        player = 1;
+                    }
+                    else
+                    {
+                        c = 'O';
+                        player = 2;
+                    }
+                    if (i == 0) { PrintMatrix(arr); }
 
-                if (Win(arr, c) == 1) { return; };                    
-                if (i == 8) { 
-                    Console.WriteLine("PLAYER1 HOA PLAYER2");
-                    return;
+                RET: Console.Write("PLAYER{0}({1}) Choose your step (1-9): ", player, c);
+                    int step = int.Parse(Console.ReadLine());
+                    if (arr[step - 1] == 'X' || arr[step - 1] == 'O')
+                    {
+                        Console.WriteLine("Your step has already exist, Please try another step");
+                        goto RET;
+                    }
+                    arr[step - 1] = c;
+                    Console.Clear();
+                    PrintMatrix(arr);
+
+                    if (Win(arr, c) == 1) { break; };
+                    if (i == 8)
+                    {
+                        Console.WriteLine("PLAYER1 HOA PLAYER2");
+                        break;
+                    }
                 }
+                Console.WriteLine("Press 's' to start the new game, 'e' to exit");
+                key = char.Parse(Console.ReadLine());
             }
+            Console.Clear();
+            Console.WriteLine("Thank you!!!See you later");
+            return;
         }
 
         static void PrintMatrix(int[] arr)
@@ -83,6 +89,19 @@ namespace TikTakGame
                 return 1;
             }
             else { return 0; }           
+        }
+        static void PrintTitle()
+        {
+            Console.WriteLine("Welcome to Tic Tac Toe Game ^^");
+            Console.WriteLine("PLAYER1 ({0}) vs PLAYER2 ({1})", 'X', 'O');
+            Console.WriteLine("Press 's' to start the new game, 'e' to exit");
+        }
+        static void InitialMatrix(int[] arr)
+        {
+            for (int i = 0; i < 9; i++)
+            {
+                arr[i] = 32;
+            }
         }
     }
 }
