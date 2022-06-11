@@ -47,7 +47,7 @@ namespace TikTakGame
                     if (Win(arr, c) == 1) { break; };
                     if (i == 8)
                     {
-                        Console.WriteLine("PLAYER1 HOA PLAYER2");
+                        Console.WriteLine("\nPLAYER1 HOA PLAYER2\n");
                         break;
                     }
                 }
@@ -81,10 +81,10 @@ namespace TikTakGame
                 (arr[2] == arr[4] && arr[2] == arr[6] && arr[2] == c))
             {
                 if (c == 'X'){
-                    Console.WriteLine("PLAYER1 WIN");
+                    Console.WriteLine("\nPLAYER1 WIN\n");
                 }
                 else { 
-                    Console.WriteLine("PLAYER2 WIN");
+                    Console.WriteLine("\nPLAYER2 WIN\n");
                 }
                 return 1;
             }
